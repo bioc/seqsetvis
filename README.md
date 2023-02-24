@@ -1,6 +1,6 @@
 [![Coverage Status](https://img.shields.io/codecov/c/github/jrboyd/seqsetvis/master.svg)](https://codecov.io/github/jrboyd/seqsetvis?branch=master)
-[![Travis-CI Build Status](https://travis-ci.org/jrboyd/seqsetvis.svg?branch=master)](https://travis-ci.org/jrboyd/seqsetvis)
 
+See the [vignette](https://bioconductor.org/packages/release/bioc/vignettes/seqsetvis/inst/doc/seqsetvis_overview.html) for an overview of most common functions and usage examples.
 # Installation
 
 ## From Bioconductor

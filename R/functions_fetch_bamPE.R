@@ -25,6 +25,7 @@
 #'   qgr.
 #' @param summary_FUN function.  only relevant if win_method is "summary".
 #'   passed to \code{\link{viewGRangesWinSummary_dt}}.
+#' @param fragLens never used by ssvFetchBamPE Ignore.
 #' @param anchor character, one of c("center", "center_unstranded", "left",
 #'   "left_unstranded")
 #' @param names_variable The column name where unique_names are stored.
@@ -72,6 +73,7 @@ ssvFetchBamPE = function(file_paths,
                          win_size = 50,
                          win_method = c("sample", "summary")[1],
                          summary_FUN = stats::weighted.mean,
+                         fragLens = "not_used",
                          anchor = c("left", "left_unstranded", "center",
                                     "center_unstranded")[3],
                          names_variable = "sample",
@@ -330,6 +332,7 @@ fetchBamPE = function(bam_f,
 
     ext_cov = coverage(split(GRanges(bam_dt), bam_dt$which_label))
     score_gr = GRanges(ext_cov)
+    score_gr = harmonize_seqlengths(score_gr, bam_f)
 
     if(length(score_gr) == 0){
         score_gr = sbgr
