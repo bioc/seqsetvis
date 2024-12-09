@@ -4,7 +4,15 @@
 \alias{centerGRangesAtMax}
 \title{Centers query GRanges at maximum signal in prof_dt.}
 \usage{
-centerGRangesAtMax(prof_dt, qgr, x_ = "x", y_ = "y", by_ = "id", width = 1)
+centerGRangesAtMax(
+  prof_dt,
+  qgr,
+  x_ = "x",
+  y_ = "y",
+  by_ = "id",
+  width = 1,
+  view_size = NULL
+)
 }
 \arguments{
 \item{prof_dt}{a GRanges or data.table as returned by ssvFetch*.}
@@ -20,6 +28,12 @@ could be "y_norm" if append_ynorm was applied to data.}
 "id".}
 
 \item{width}{Desired width of final regions.  Default is 1.}
+
+\item{view_size}{the size in \code{x_} to consider for finding the max
+of \code{y_}.
+if length(view_size) == 1, range will be c(-view_size, view_size).
+if length(view_size) > 1, range will be range(view_size).
+default value of NULL uses complete range of x.}
 }
 \value{
 a GRanges with same mcols as qgr that has been centered based on
@@ -34,5 +48,7 @@ data(CTCF_in_10a_profiles_gr)
 data(CTCF_in_10a_profiles_dt)
 centerGRangesAtMax(CTCF_in_10a_profiles_dt, CTCF_in_10a_overlaps_gr)
 centerGRangesAtMax(CTCF_in_10a_profiles_gr, CTCF_in_10a_overlaps_gr)
+
+centerGRangesAtMax(CTCF_in_10a_profiles_gr, CTCF_in_10a_overlaps_gr, view_size = 50)
 
 }

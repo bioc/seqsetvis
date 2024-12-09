@@ -1,3 +1,6 @@
+# 1.27.2
+* centerGRangesAtMax now supports view_size in the same way as other center functions
+
 # 1.27.1
 * Providing unique_names as a factor to ssvFetchSignal was causing mismatches between names and input order
 
