@@ -107,7 +107,7 @@ ssvFetchBam = function(file_paths,
             fragLens = rep(fragLens[1], length(file_paths))
         }
     }
-    tmp = .get_file_attribs(file_paths, file_attribs)
+    tmp = .get_file_attribs(file_paths, file_attribs, names_variable)
     file_paths = tmp$file_paths
     file_attribs = tmp$file_attribs
     remove(tmp)

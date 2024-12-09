@@ -84,7 +84,7 @@ ssvFetchSignal = function(file_paths,
 
 
 
-    tmp = .get_file_attribs(file_paths, file_attribs)
+    tmp = .get_file_attribs(file_paths, file_attribs, names_variable)
     file_paths = tmp$file_paths
     file_attribs = tmp$file_attribs
     remove(tmp)
@@ -744,7 +744,7 @@ quantileGRangesWidth = function(qgr,
     return(fwidth)
 }
 
-.get_file_attribs = function(file_paths, file_attribs){
+.get_file_attribs = function(file_paths, file_attribs, names_variable){
     if(is.data.table(file_paths)){
         file_paths = as.data.frame(file_paths)
     }
@@ -785,6 +785,15 @@ quantileGRangesWidth = function(qgr,
     if (is.factor(file_paths)){
         file_paths = as.character(file_paths)
     }
+
+    #sort file paths and attrib in the same way if name variable is a factor
+    if(names_variable %in% colnames(file_attribs)){
+        if(is.factor(file_attribs[[names_variable]])){
+            o = order(file_attribs[[names_variable]])
+            file_paths = file_paths[o]
+            file_attribs = file_attribs[o,, drop = FALSE]
+        }
+    }
     return(list(file_paths = file_paths, file_attribs = file_attribs))
 }
 
@@ -813,7 +822,9 @@ quantileGRangesWidth = function(qgr,
         }
     }
     if (is.factor(unique_names)){
-        unique_names = levels(droplevels(unique_names))
+        unique_names = as.character(unique_names)
+        #using levels can cause unintentional reordering
+        # unique_names = levels(droplevels(unique_names))
     }
     if(any(duplicated(unique_names))){
         stop("some unique_names are duplicated:\n",

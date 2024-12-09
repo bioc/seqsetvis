@@ -1,3 +1,6 @@
+# 1.27.1
+* Providing unique_names as a factor to ssvFetchSignal was causing mismatches between names and input order
+
 # 1.25.5
 * within_clust_sort now respects "none" sort strategy. was bugged
 
