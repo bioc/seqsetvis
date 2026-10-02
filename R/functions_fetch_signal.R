@@ -295,6 +295,8 @@ viewGRangesWinSample_dt = function(score_gr,
     names(windows) = NULL
     windows = unlist(windows)
     windows$id = names(windows)
+    # names are kept in id, drop them so as.data.table doesn't add a names column
+    names(windows) = NULL
     windows = resize(windows, width = 1, fix = "center")
     olaps = suppressWarnings(data.table::as.data.table(
         findOverlaps(
@@ -422,6 +424,7 @@ viewGRangesWinSummary_dt = function (score_gr,
     names(tiles) = NULL
     tiles = unlist(tiles)
     tiles$id = names(tiles)
+    names(tiles) = NULL
     tiles$tile_id = seq_along(tiles)
 
 
@@ -453,7 +456,7 @@ viewGRangesWinSummary_dt = function (score_gr,
         })
     }
     mcols(score_gr) = mcols(score_gr)[attrib_var]
-    cov_dt = cbind(as.data.table(score_gr[olaps$subjectHits])[, c("start", "end", "score")],
+    cov_dt = cbind(as.data.table(score_gr[olaps$subjectHits])[, c("start", "end", attrib_var), with = FALSE],
                    as.data.table(tiles[olaps$queryHits])[, c("start", "end", "id", "tile_id")])
     stopifnot(colnames(cov_dt)[4:5] == c("start", "end"))
     colnames(cov_dt)[4:5] = c("tile_start", "tile_end")

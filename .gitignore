@@ -21,3 +21,5 @@ tests/testthat/test_improved_calc_fragLen.R
 tmp.png
 annotation_source.Rds
 subject_gr.Rds
+.Renviron
+tests/testthat/_problems
