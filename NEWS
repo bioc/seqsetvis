@@ -1,3 +1,7 @@
+# 1.33.3
+* fixed secondary bug from 1.33.1 names fix
+* skipped a bigwig fetch on windows
+
 # 1.33.1
 * compatibility update for Bioc 3.24 and R 4.6.1
 

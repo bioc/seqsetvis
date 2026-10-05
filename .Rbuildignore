@@ -12,3 +12,4 @@
 ^vignettes/seqsetvis_fetchBams.Rmd
 ^\.Renviron$
 ^\.claude$
+^\.positai$
